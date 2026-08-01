@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated HazeGroupNet paper."
+title: "HazeGroupNet: Dual-Cue Residual Calibration for Native Receptive-Field Groups in Remote Sensing Image Dehazing"
+type: software
+authors:
+  - family-names: Jia
+    given-names: Xiangyu
+    orcid: "https://orcid.org/0009-0009-0328-6319"
+  - family-names: Chen
+    given-names: Zhibo
+    orcid: "https://orcid.org/0000-0002-2346-7530"
+  - family-names: Mu
+    given-names: Liping
+  - family-names: Zhao
+    given-names: Yongjun
+  - family-names: Zhang
+    given-names: Xinpeng
+  - family-names: Ji
+    given-names: Shaoxiang
+  - family-names: Zhang
+    given-names: Shengyi
+    orcid: "https://orcid.org/0009-0001-3383-9529"
+repository-code: "https://github.com/jxy0413/HazeGroupNet"
+abstract: "Official implementation of HazeGroupNet for remote-sensing image dehazing."
+keywords:
+  - remote sensing
+  - image dehazing
+  - image restoration
+  - dynamic routing
+  - PyTorch

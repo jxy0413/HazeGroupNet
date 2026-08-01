@@ -1,0 +1,39 @@
+experiment:
+  name: hazegroupnet_s_satehaze1k
+  seed: 2026
+model:
+  variant: small
+  base_channels: 24
+  encoder_depths: [3, 3, 4]
+  bottleneck_depth: 6
+  decoder_depths: [4, 3, 3]
+  density_patch_size: 15
+  gate_hidden_channels: 8
+  route_temperature: 1.25
+data:
+  crop_size: 512
+  channels: 3
+  normalization: zero_one
+train:
+  max_steps: 15000
+  microbatch_size: 8
+  accumulation_steps: 4
+  optimizer: adamw
+  learning_rate: 0.0004
+  minimum_learning_rate: 0.00000004
+  weight_decay: 0.0
+  fft_weight: 0.1
+  amp: true
+  scheduler: cosine
+  validation_interval: 500
+  save_interval: 500
+  early_stopping:
+    eligibility_step: 10000
+    earliest_stop_step: 12500
+    patience: 5
+    min_delta_psnr: 0.03
+    min_delta_ssim: 0.0005
+    psnr_guard: 0.03
+evaluation:
+  clip_output: true
+  metrics: [psnr, ssim, delta_e00]

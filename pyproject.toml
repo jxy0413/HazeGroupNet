@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hazegroupnet"
+version = "0.1.0"
+description = "HazeGroupNet: dual-cue residual calibration for remote-sensing image dehazing"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Xiangyu Jia" },
+    { name = "Zhibo Chen" },
+    { name = "Liping Mu" },
+    { name = "Yongjun Zhao" },
+    { name = "Xinpeng Zhang" },
+    { name = "Shaoxiang Ji" },
+    { name = "Shengyi Zhang" },
+]
+dependencies = [
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "numpy>=1.24",
+    "Pillow>=10.0",
+    "PyYAML>=6.0",
+    "scikit-image>=0.21",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+extend-exclude = ["data", "outputs", "checkpoints", "third_party"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -1,0 +1,19 @@
+name: hazegroupnet
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch>=2.1
+  - torchvision>=0.16
+  - pytorch-cuda=12.1
+  - numpy>=1.24
+  - pillow>=10.0
+  - pyyaml>=6.0
+  - scikit-image>=0.21
+  - tqdm>=4.66
+  - pip
+  - pip:
+      - pytest>=8.0
+      - ruff>=0.5

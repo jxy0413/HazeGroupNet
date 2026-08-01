@@ -1,0 +1,8 @@
+# Runtime dependencies. Install with: pip install -r requirements.txt
+torch>=2.1
+torchvision>=0.16
+numpy>=1.24
+Pillow>=10.0
+PyYAML>=6.0
+scikit-image>=0.21
+tqdm>=4.66
