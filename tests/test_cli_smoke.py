@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 import torch
 from PIL import Image
 
@@ -99,6 +100,7 @@ def test_training_dry_run_and_evaluator(tmp_path: Path) -> None:
             str(result_dir),
             "--device",
             "cpu",
+            "--save-predictions",
         ],
         check=True,
         capture_output=True,
@@ -107,3 +109,24 @@ def test_training_dry_run_and_evaluator(tmp_path: Path) -> None:
     summary = json.loads((result_dir / "summary.json").read_text(encoding="utf-8"))
     assert summary["variant"] == "HazeGroupNet-T"
     assert summary["overall"]["num_images"] == 1
+    assert summary["evaluation_protocol"]["prediction_encoding"] == "8-bit sRGB"
+
+    saved_prediction_path = result_dir / "predictions" / "sample.png"
+    with Image.open(saved_prediction_path) as image:
+        saved_prediction = np.asarray(image.convert("RGB"), dtype=np.uint8)
+    with Image.open(dataset_root / "target.png") as image:
+        target = np.asarray(image.convert("RGB"), dtype=np.uint8)
+    assert saved_prediction.dtype == np.uint8
+    assert saved_prediction.shape == target.shape
+
+    from hazegroupnet.metrics import compute_metrics
+
+    recomputed = compute_metrics(saved_prediction, target)
+    with (result_dir / "per_image.csv").open(newline="", encoding="utf-8") as handle:
+        row = next(csv.DictReader(handle))
+    for metric_name in ("psnr", "ssim", "delta_e00"):
+        assert float(row[metric_name]) == pytest.approx(
+            recomputed[metric_name],
+            rel=0.0,
+            abs=1e-12,
+        )

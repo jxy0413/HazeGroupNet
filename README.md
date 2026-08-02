@@ -97,10 +97,11 @@ python tools/train.py --config configs/rrshid/small.yaml \
   --dataset-root /path/to/RRSHID --train-manifest /path/to/train.csv \
   --val-manifest /path/to/val.csv --output-dir runs/rrshid_small
 
-# Evaluate a checkpoint with a frozen manifest and save per-image metrics.
+# Evaluate a checkpoint with a frozen manifest using saved-image 8-bit metrics.
 python tools/evaluate.py --config configs/rrshid/small.yaml \
   --checkpoint /path/to/checkpoint.pt --dataset-root /path/to/RRSHID \
-  --manifest /path/to/test.csv --output-dir results/rrshid_small
+  --manifest /path/to/test.csv --output-dir results/rrshid_small \
+  --save-predictions
 
 # Run inference on one image or a directory.
 python tools/infer.py --config configs/rrshid/large.yaml \
@@ -130,10 +131,15 @@ comparing these values with measurements from another profiler.
 The manuscript uses fixed data splits, checkpoint-selection rules, and a
 frozen evaluation protocol. This release provides the protocol specification,
 a generic evaluator, and expected reported metrics, but no trained weights.
+The evaluator clips and quantizes every prediction to 8-bit sRGB before
+computing metrics; `--save-predictions` writes the exact same arrays used by
+the metric functions.
 Please read
 [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) and
 [reproducibility/paper/expected_metrics.json](reproducibility/paper/expected_metrics.json)
 before interpreting numerical differences.
+The paper-value retention and saved-PNG consistency audit is recorded in
+[reproducibility/paper/EVALUATION_8BIT_AUDIT.md](reproducibility/paper/EVALUATION_8BIT_AUDIT.md).
 
 The RRSHID and SateHaze1k recipes also encode the paper's frozen
 quality-based early-stopping rule. Monitoring begins only at the configured

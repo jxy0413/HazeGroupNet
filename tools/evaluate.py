@@ -32,9 +32,13 @@ from hazegroupnet.utils.config import (  # noqa: E402
 )
 
 
-def load_rgb(path: Path) -> np.ndarray:
+def load_rgb8(path: Path) -> np.ndarray:
     with Image.open(path) as image:
-        return np.asarray(image.convert("RGB"), dtype=np.float32) / 255.0
+        return np.asarray(image.convert("RGB"), dtype=np.uint8)
+
+
+def load_rgb(path: Path) -> np.ndarray:
+    return load_rgb8(path).astype(np.float32) / 255.0
 
 
 def to_tensor(image: np.ndarray, device: torch.device) -> torch.Tensor:
@@ -45,11 +49,23 @@ def to_image(tensor: torch.Tensor) -> np.ndarray:
     return tensor.squeeze(0).detach().float().cpu().clamp(0.0, 1.0).permute(1, 2, 0).numpy()
 
 
-def save_rgb(image: np.ndarray, path: Path) -> None:
+def quantize_rgb8(image: np.ndarray) -> np.ndarray:
+    """Clip a floating-point RGB image and quantize it to saved-PNG precision."""
+    image = np.asarray(image)
+    if image.ndim != 3 or image.shape[-1] != 3:
+        raise ValueError(f"Expected HxWx3 RGB image, received {image.shape}")
+    if not np.isfinite(image).all():
+        raise ValueError("Prediction contains non-finite values")
+    return np.rint(np.clip(image, 0.0, 1.0) * 255.0).astype(np.uint8)
+
+
+def save_rgb8(image: np.ndarray, path: Path) -> None:
+    """Save the exact uint8 RGB array used by the frozen evaluator."""
+    image = np.asarray(image)
+    if image.dtype != np.uint8 or image.ndim != 3 or image.shape[-1] != 3:
+        raise ValueError("save_rgb8 expects an HxWx3 uint8 RGB array")
     path.parent.mkdir(parents=True, exist_ok=True)
-    Image.fromarray(np.round(np.clip(image, 0.0, 1.0) * 255.0).astype(np.uint8), mode="RGB").save(
-        path
-    )
+    Image.fromarray(image, mode="RGB").save(path)
 
 
 def mean_summary(rows: list[dict[str, Any]]) -> dict[str, float | int]:
@@ -87,7 +103,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--save-predictions",
         action="store_true",
-        help="Write 8-bit PNG predictions under output/predictions.",
+        help="Write the exact 8-bit RGB predictions used for metrics under output/predictions.",
     )
     parser.add_argument(
         "--non-strict", action="store_true", help="Allow missing/unexpected checkpoint keys."
@@ -121,13 +137,13 @@ def main() -> None:
     with torch.inference_mode():
         for index, record in enumerate(records, start=1):
             hazy = load_rgb(record.hazy_path)
-            target = load_rgb(record.gt_path)
+            target = load_rgb8(record.gt_path)
             if hazy.shape != target.shape:
                 raise ValueError(
                     f"{record.image_id}: hazy {hazy.shape} and reference {target.shape} differ"
                 )
-            prediction = to_image(model(to_tensor(hazy, device)))
-            metrics = compute_metrics(prediction, target)
+            prediction_rgb8 = quantize_rgb8(to_image(model(to_tensor(hazy, device))))
+            metrics = compute_metrics(prediction_rgb8, target)
             row: dict[str, Any] = {
                 "image_id": record.image_id,
                 "split": record.split,
@@ -136,8 +152,8 @@ def main() -> None:
             }
             rows.append(row)
             if args.save_predictions:
-                save_rgb(
-                    prediction,
+                save_rgb8(
+                    prediction_rgb8,
                     args.output_dir / "predictions" / f"{record.image_id}.png",
                 )
             print(
@@ -161,6 +177,11 @@ def main() -> None:
         "variant": model.recipe.name,
         "checkpoint": str(args.checkpoint),
         "manifest": str(args.manifest),
+        "evaluation_protocol": {
+            "prediction_encoding": "8-bit sRGB",
+            "quantization": "clip to [0,1], round to nearest integer, encode as uint8",
+            "metrics_input": "the same quantized RGB array optionally saved as PNG",
+        },
         "overall": mean_summary(rows),
         "by_haze_level": {
             level: mean_summary(level_rows) for level, level_rows in sorted(grouped.items())

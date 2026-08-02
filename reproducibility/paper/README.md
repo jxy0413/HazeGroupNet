@@ -6,6 +6,8 @@ protocol in the HazeGroupNet manuscript. It is not a checkpoint release.
 ## Scope
 
 - `expected_metrics.json` records the principal **reported paper results**.
+- `EVALUATION_8BIT_AUDIT.md` records the saved-image 8-bit metric convention
+  and its automated PNG read-back consistency check.
 - `manifests/` documents the required manifest schema without redistributing
   dataset paths or image identifiers.
 - `frozen_protocols/` describes fixed evaluation and profiling conventions.

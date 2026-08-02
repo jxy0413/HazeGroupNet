@@ -33,8 +33,10 @@ partially consumed multi-worker data-loader epoch.
 
 Unless a new experiment explicitly states otherwise:
 
-- Evaluate RGB predictions against paired RGB references after clipping to
-  `[0, 1]`.
+- Clip predictions to `[0, 1]`, round them to the nearest 8-bit sRGB value,
+  and evaluate the resulting `uint8` RGB array. When predictions are saved,
+  the evaluator writes this exact array to PNG; metrics never use the
+  pre-quantized floating-point output.
 - Compute PSNR from per-image RGB mean-squared error and average the
   per-image scores.
 - Compute SSIM with an 11x11 Gaussian window (sigma 1.5), population
