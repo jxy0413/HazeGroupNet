@@ -1,0 +1,92 @@
+{
+  "format": "hazegroupnet_representative_checkpoint_inventory_v1",
+  "updated_at": "2026-08-28T20:04:37+08:00",
+  "expected_weight_count": 6,
+  "available_weight_count": 2,
+  "policy": {
+    "datasets": [
+      "RRSHID",
+      "SateHaze1k"
+    ],
+    "variants": [
+      "HGN-T",
+      "HGN-S",
+      "HGN-L"
+    ],
+    "one_weight_per_dataset_variant": true,
+    "selection": "one representative validation-selected run per dataset and model variant",
+    "artifact_type": "pure PyTorch state_dict without optimizer, scheduler, RNG state, or absolute source paths",
+    "scope_note": "The six representative weights support inference and checkpoint-specific verification; they are not the 18 independent runs used to compute the manuscript's three-seed mean and sample SD."
+  },
+  "weights": [
+    {
+      "dataset": "RRSHID",
+      "variant": "HGN-T",
+      "status": "missing",
+      "file": "RRSHID_HGN-T_best.pt"
+    },
+    {
+      "dataset": "RRSHID",
+      "variant": "HGN-S",
+      "status": "available_representative_verified",
+      "file": "RRSHID_HGN-S_best.pt",
+      "seed": 2026,
+      "best_step": 38000,
+      "validation_psnr": 24.220724554805013,
+      "validation_ssim_gaussian11": 0.6926170287581234,
+      "parameters": 1707975,
+      "bytes": 7003895,
+      "sha256": "740bf2b2882c190bb4b5af964194aa8e808f5a8f8ddf56ff8d2ecf9a57007456",
+      "test_metrics": {
+        "images": 304,
+        "protocol": "saved 8-bit sRGB",
+        "psnr": 24.645608,
+        "ssim_gaussian11": 0.706905,
+        "delta_e00": 5.287867
+      },
+      "provenance": "Extracted from the validation-selected seed-2026 step-38000 run; strict public-code loading and a frozen 304-image test replay were verified."
+    },
+    {
+      "dataset": "RRSHID",
+      "variant": "HGN-L",
+      "status": "training_on_server",
+      "file": "RRSHID_HGN-L_best.pt",
+      "seed": 2027
+    },
+    {
+      "dataset": "SateHaze1k",
+      "variant": "HGN-T",
+      "status": "missing",
+      "file": "SateHaze1k_HGN-T_best.pt"
+    },
+    {
+      "dataset": "SateHaze1k",
+      "variant": "HGN-S",
+      "status": "missing",
+      "file": "SateHaze1k_HGN-S_best.pt"
+    },
+    {
+      "dataset": "SateHaze1k",
+      "variant": "HGN-L",
+      "status": "available_representative_verified",
+      "file": "SateHaze1k_HGN-L_best.pt",
+      "seed": 2027,
+      "controller_decision": "early_stopped_plateau",
+      "control_stop_step": 13500,
+      "best_step": 11000,
+      "validation_psnr": 25.035513496398927,
+      "validation_ssim_gaussian11": 0.8179124921915077,
+      "parameters": 4071199,
+      "bytes": 16534326,
+      "sha256": "684bbe53e0ddbfa6c770cec84063ae35fa4558a89b710c29f110548ffbbdee45",
+      "test_metrics": {
+        "images": 135,
+        "protocol": "saved 8-bit sRGB",
+        "psnr": 22.9326202616,
+        "ssim_gaussian11": 0.8519179161,
+        "delta_e00": 7.1734047097
+      },
+      "provenance": "Downloaded from the completed validation-selected seed-2027 run; SHA-256, strict public-code loading, validation replay, and a frozen 135-image test replay were verified."
+    }
+  ]
+}

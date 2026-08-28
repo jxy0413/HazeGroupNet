@@ -35,7 +35,7 @@ def load_checkpoint(
     path: str | Path, map_location: str | torch.device = "cpu"
 ) -> dict[str, torch.Tensor]:
     """Load a checkpoint and return a normalized, non-DataParallel state dict."""
-    payload = torch.load(Path(path), map_location=map_location, weights_only=False)
+    payload = torch.load(Path(path), map_location=map_location, weights_only=True)
     return _strip_distributed_prefix(_extract_state_dict(payload))
 
 

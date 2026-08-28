@@ -24,6 +24,8 @@ precision mode.
 
 ## Checkpoint provenance
 
-No checkpoint, private log, or immutable internal manifest is released. The
-expected-metrics file is a manuscript record, not a substitute for a model
-artifact.
+Curated representative checkpoints and their public hashes are released under
+`checkpoints/`. Private logs and immutable internal manifests are not
+released. The expected-metrics file records the manuscript's multi-seed
+results; checkpoint-specific results are recorded separately in the public
+checkpoint manifest.

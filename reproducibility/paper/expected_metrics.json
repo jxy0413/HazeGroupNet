@@ -1,25 +1,50 @@
 {
-  "schema_version": "1.0",
-  "status": "reported_paper_results_not_checkpoint_artifacts",
+  "schema_version": "1.1",
+  "status": "current_revision_reported_multi_seed_results",
   "notes": [
-    "Values are reported in the associated manuscript under its frozen protocols.",
-    "This repository intentionally does not release the checkpoints used for these results.",
+    "Values are arithmetic means and sample standard deviations over three independent runs (seeds 2026, 2027, and 2028) under the frozen manuscript protocols.",
+    "The representative checkpoints under checkpoints/ are executable artifacts for individual validation-selected runs; consult checkpoints/MANIFEST.json for their availability and checkpoint-specific metrics.",
+    "The six-checkpoint release is not the complete set of 18 independent runs underlying the manuscript's three-seed mean and sample SD.",
     "Overall metrics are computed directly over each full test set, not by averaging subset means."
   ],
   "rrshid": {
     "released_split": {"train": 2441, "validation": 308, "test": 304},
     "haze_group_results": {
-      "HazeGroupNet-T": {"psnr": 24.28, "ssim": 0.6972, "delta_e00": 5.62},
-      "HazeGroupNet-S": {"psnr": 24.65, "ssim": 0.7069, "delta_e00": 5.29},
-      "HazeGroupNet-L": {"psnr": 25.11, "ssim": 0.7215, "delta_e00": 4.92}
+      "HazeGroupNet-T": {
+        "psnr": {"mean": 24.33, "sample_sd": 0.10},
+        "ssim": {"mean": 0.6991, "sample_sd": 0.0032},
+        "delta_e00": {"mean": 5.55, "sample_sd": 0.08}
+      },
+      "HazeGroupNet-S": {
+        "psnr": {"mean": 24.72, "sample_sd": 0.09},
+        "ssim": {"mean": 0.7094, "sample_sd": 0.0026},
+        "delta_e00": {"mean": 5.20, "sample_sd": 0.10}
+      },
+      "HazeGroupNet-L": {
+        "psnr": {"mean": 25.18, "sample_sd": 0.09},
+        "ssim": {"mean": 0.7243, "sample_sd": 0.0034},
+        "delta_e00": {"mean": 4.85, "sample_sd": 0.12}
+      }
     }
   },
   "satehaze1k": {
     "released_split": {"train": 960, "validation": 105, "test": 135},
     "haze_group_results": {
-      "HazeGroupNet-T": {"psnr": 24.28, "ssim": 0.8930, "delta_e00": 6.05},
-      "HazeGroupNet-S": {"psnr": 24.77, "ssim": 0.9027, "delta_e00": 5.78},
-      "HazeGroupNet-L": {"psnr": 25.15, "ssim": 0.9113, "delta_e00": 5.48}
+      "HazeGroupNet-T": {
+        "psnr": {"mean": 24.33, "sample_sd": 0.09},
+        "ssim": {"mean": 0.8947, "sample_sd": 0.0031},
+        "delta_e00": {"mean": 5.96, "sample_sd": 0.13}
+      },
+      "HazeGroupNet-S": {
+        "psnr": {"mean": 24.87, "sample_sd": 0.15},
+        "ssim": {"mean": 0.9048, "sample_sd": 0.0037},
+        "delta_e00": {"mean": 5.68, "sample_sd": 0.17}
+      },
+      "HazeGroupNet-L": {
+        "psnr": {"mean": 25.23, "sample_sd": 0.14},
+        "ssim": {"mean": 0.9142, "sample_sd": 0.0050},
+        "delta_e00": {"mean": 5.37, "sample_sd": 0.19}
+      }
     }
   },
   "profiling": {

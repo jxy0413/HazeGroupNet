@@ -2,7 +2,9 @@
 
 ## Non-redistribution policy
 
-This repository contains no images, labels, dataset archives, or checkpoints.
+This repository contains no images, labels, or dataset archives. Curated
+HazeGroupNet checkpoints contain learned parameters only and are documented
+under `checkpoints/`.
 Obtain RRSHID, SateHaze1k, RICE, and any other benchmark only from its
 original provider and comply with that provider's license and access terms.
 In particular, this code release does not grant rights to redistribute or use

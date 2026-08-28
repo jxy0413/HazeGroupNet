@@ -17,12 +17,12 @@ fusion as the main information path.
        alt="Overall HazeGroupNet architecture and DGRC module" width="100%">
 </p>
 
-> **Release scope.** This repository contains source code, configuration
-> files, split-manifest specifications, and frozen-evaluation instructions.
-> It intentionally does **not** distribute trained checkpoints, datasets, or
-> third-party baseline implementations. Numerical values in the manuscript
-> are reported paper results; this repository is not a bundle of paper
-> checkpoints.
+> **Release scope.** This repository contains source code, configurations,
+> split-manifest specifications, frozen-evaluation instructions, and a curated
+> representative-checkpoint set. The checkpoint release is being populated as
+> a six-model matrix (RRSHID/SateHaze1k x Tiny/Small/Large); its authoritative
+> current status is recorded in [`checkpoints/MANIFEST.json`](checkpoints/MANIFEST.json).
+> Datasets and third-party baseline implementations are not redistributed.
 
 ## Highlights
 
@@ -50,6 +50,7 @@ DGRC. These groups are not recovered by splitting an already fused feature.
 ```text
 HazeGroupNet/
 |-- assets/                  # Architecture figures used in this README
+|-- checkpoints/             # Representative validation-selected weights
 |-- configs/                 # RRSHID and SateHaze1k configurations
 |-- docs/                    # Installation, data, reproducibility, notices
 |-- reproducibility/paper/   # Paper protocol and reported-result metadata
@@ -88,8 +89,9 @@ is documented in
 
 ## Quick start
 
-The following commands use the public, path-agnostic CLIs. They require a
-user-supplied checkpoint for evaluation or inference.
+The following commands use the public, path-agnostic CLIs. They accept either
+one of the representative checkpoints in `checkpoints/` or a user-supplied
+checkpoint.
 
 ```bash
 # Train a Small model with a paired-image manifest.
@@ -97,9 +99,9 @@ python tools/train.py --config configs/rrshid/small.yaml \
   --dataset-root /path/to/RRSHID --train-manifest /path/to/train.csv \
   --val-manifest /path/to/val.csv --output-dir runs/rrshid_small
 
-# Evaluate a checkpoint with a frozen manifest using saved-image 8-bit metrics.
+# Evaluate the released RRSHID Small checkpoint with saved-image 8-bit metrics.
 python tools/evaluate.py --config configs/rrshid/small.yaml \
-  --checkpoint /path/to/checkpoint.pt --dataset-root /path/to/RRSHID \
+  --checkpoint checkpoints/RRSHID_HGN-S_best.pt --dataset-root /path/to/RRSHID \
   --manifest /path/to/test.csv --output-dir results/rrshid_small \
   --save-predictions
 
@@ -130,7 +132,10 @@ comparing these values with measurements from another profiler.
 
 The manuscript uses fixed data splits, checkpoint-selection rules, and a
 frozen evaluation protocol. This release provides the protocol specification,
-a generic evaluator, and expected reported metrics, but no trained weights.
+a generic evaluator, reported-result metadata, and one representative
+validation-selected checkpoint for each dataset/variant as it becomes
+available. The six representative weights are not an ensemble and do not by
+themselves reproduce the manuscript's three-seed mean and sample SD.
 The evaluator clips and quantizes every prediction to 8-bit sRGB before
 computing metrics; `--save-predictions` writes the exact same arrays used by
 the metric functions.
@@ -153,8 +158,9 @@ machine-readable record is available in [CITATION.cff](CITATION.cff).
 
 ## Third-party and data notices
 
-This repository does not redistribute RRSHID, SateHaze1k, RICE, checkpoints,
-or comparative-method code. See [NOTICE.md](NOTICE.md) and
+This repository does not redistribute RRSHID, SateHaze1k, RICE, or
+comparative-method code. Representative HazeGroupNet checkpoints are described
+in [`checkpoints/README.md`](checkpoints/README.md). See [NOTICE.md](NOTICE.md) and
 [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md) for attribution and usage notes.
 
 ## License

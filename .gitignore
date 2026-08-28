@@ -86,3 +86,13 @@ runs/
 !reproducibility/**/*.json
 !reproducibility/**/*.yaml
 !configs/**/*.yaml
+
+# Curated representative checkpoints. Keep every other local model artefact
+# ignored; add future public weights explicitly after release QA.
+!checkpoints/
+checkpoints/*
+!checkpoints/README.md
+!checkpoints/MANIFEST.json
+!checkpoints/WEIGHTS_NOTICE.md
+!checkpoints/RRSHID_HGN-S_best.pt
+!checkpoints/SateHaze1k_HGN-L_best.pt

@@ -1,7 +1,8 @@
 # Paper reproducibility metadata
 
 This directory records public metadata needed to interpret the experimental
-protocol in the HazeGroupNet manuscript. It is not a checkpoint release.
+protocol in the HazeGroupNet manuscript. Representative weights are released
+separately under `checkpoints/`.
 
 ## Scope
 
@@ -19,8 +20,9 @@ checkpoint. Do not select a checkpoint against a test set.
 ## Reported configurations
 
 The paper evaluates Tiny, Small, and Large variants. The Large variant is the
-default accuracy configuration in the manuscript; no checkpoint is bundled for
-any variant.
+default accuracy configuration in the manuscript. One representative
+validation-selected checkpoint per dataset/variant is being released; consult
+`checkpoints/MANIFEST.json` for the current inventory.
 
 ## Dataset use
 

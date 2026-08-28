@@ -3,16 +3,20 @@
 ## What this release supports
 
 The repository provides a self-contained implementation of HazeGroupNet,
-model configurations, generic paired-image CLIs, metric code, and public
-protocol specifications. It does not provide trained checkpoints or any
-benchmark image data.
+model configurations, generic paired-image CLIs, metric code, public protocol
+specifications, and a curated representative-checkpoint set. It does not
+provide benchmark image data.
 
 ## Paper versus local reruns
 
 The values in the manuscript are **reported paper results** obtained with the
 paper's frozen data splits, checkpoint-selection rules, evaluator, and
-hardware protocol. They should not be treated as values reproducible from a
-checkpoint included here, because no checkpoints are released.
+hardware protocol. A six-checkpoint matrix is being populated with one
+representative validation-selected run per dataset and model scale; its
+current inventory is recorded in `checkpoints/MANIFEST.json`. It is intended
+for direct inference and checkpoint-specific verification and does not replace
+the 18 independent runs underlying the manuscript's three-seed mean and sample
+SD.
 
 For an independent rerun:
 
@@ -72,5 +76,5 @@ validation PSNR with SSIM as the tie-breaker.
 ## Frozen-protocol metadata
 
 The paper-specific protocol descriptions and reported numbers are stored under
-`reproducibility/paper/`. They are intentionally descriptive metadata rather
-than downloadable private artifacts.
+`reproducibility/paper/`. Checkpoint-specific hashes and availability are
+stored under `checkpoints/`.
