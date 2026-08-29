@@ -12,6 +12,8 @@ separately under `checkpoints/`.
 - `manifests/` documents the required manifest schema without redistributing
   dataset paths or image identifiers.
 - `frozen_protocols/` describes fixed evaluation and profiling conventions.
+- `r44_score_provenance/` provides the full-precision per-image CSV records
+  and SHA-256 checksums released in response to Reviewer~4, Comment~4.
 
 The source code exposes generic CLIs. To reproduce a new run, provide your own
 officially obtained data, manifests, checkpoint-selection procedure, and

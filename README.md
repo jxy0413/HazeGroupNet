@@ -145,6 +145,8 @@ Please read
 before interpreting numerical differences.
 The paper-value retention and saved-PNG consistency audit is recorded in
 [reproducibility/paper/EVALUATION_8BIT_AUDIT.md](reproducibility/paper/EVALUATION_8BIT_AUDIT.md).
+The full-precision per-image score files released for the revision are in
+[reproducibility/paper/r44_score_provenance](reproducibility/paper/r44_score_provenance).
 
 The RRSHID and SateHaze1k recipes also encode the paper's frozen
 quality-based early-stopping rule. Monitoring begins only at the configured
