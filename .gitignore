@@ -93,6 +93,11 @@ runs/
 checkpoints/*
 !checkpoints/README.md
 !checkpoints/MANIFEST.json
+!checkpoints/CHECKSUMS.sha256
 !checkpoints/WEIGHTS_NOTICE.md
+!checkpoints/RRSHID_HGN-T_best.pt
 !checkpoints/RRSHID_HGN-S_best.pt
+!checkpoints/RRSHID_HGN-L_best.pt
+!checkpoints/SateHaze1k_HGN-T_best.pt
+!checkpoints/SateHaze1k_HGN-S_best.pt
 !checkpoints/SateHaze1k_HGN-L_best.pt

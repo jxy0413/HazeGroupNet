@@ -1,8 +1,8 @@
 {
   "format": "hazegroupnet_representative_checkpoint_inventory_v1",
-  "updated_at": "2026-08-28T20:04:37+08:00",
+  "updated_at": "2026-08-29T11:36:30+08:00",
   "expected_weight_count": 6,
-  "available_weight_count": 2,
+  "available_weight_count": 6,
   "policy": {
     "datasets": [
       "RRSHID",
@@ -22,8 +22,18 @@
     {
       "dataset": "RRSHID",
       "variant": "HGN-T",
-      "status": "missing",
-      "file": "RRSHID_HGN-T_best.pt"
+      "status": "available_representative_verified",
+      "file": "RRSHID_HGN-T_best.pt",
+      "seed": 2027,
+      "controller_decision": "early_stopped_plateau",
+      "control_stop_step": 50000,
+      "best_step": 40000,
+      "validation_psnr": 23.534660367222575,
+      "validation_ssim_gaussian11": 0.6624281134504777,
+      "parameters": 545007,
+      "bytes": 2313358,
+      "sha256": "14dcef958945a2b63f6dca094ce898fe75fd408d0502328c3e7792ebd1edd091",
+      "provenance": "Downloaded from the validation-selected seed-2027 run after an audited plateau stop; server/local SHA-256, pure-state_dict structure, selected-checkpoint tensor equality, and controller decision/protocol/metric hashes were verified."
     },
     {
       "dataset": "RRSHID",
@@ -49,21 +59,50 @@
     {
       "dataset": "RRSHID",
       "variant": "HGN-L",
-      "status": "training_on_server",
+      "status": "available_representative_verified",
       "file": "RRSHID_HGN-L_best.pt",
-      "seed": 2027
+      "seed": 2027,
+      "controller_decision": "early_stopped_plateau",
+      "control_stop_step": 50000,
+      "best_step": 24000,
+      "validation_psnr": 24.510508044973598,
+      "validation_ssim_gaussian11": 0.6982705000933115,
+      "parameters": 4071199,
+      "bytes": 16534326,
+      "sha256": "f60a427e9bff11f38e1d285b761ed35a963b4e817ea46897de73a8146fe6c47e",
+      "provenance": "Downloaded from the validation-selected seed-2027 run after an audited plateau stop; server/local SHA-256, pure-state_dict structure, selected-checkpoint tensor equality, and controller decision/protocol/metric hashes were verified."
     },
     {
       "dataset": "SateHaze1k",
       "variant": "HGN-T",
-      "status": "missing",
-      "file": "SateHaze1k_HGN-T_best.pt"
+      "status": "available_representative_verified",
+      "file": "SateHaze1k_HGN-T_best.pt",
+      "seed": 2026,
+      "controller_decision": "early_stopped_plateau",
+      "control_stop_step": 12500,
+      "best_step": 9500,
+      "validation_psnr": 24.46465889158703,
+      "validation_ssim_gaussian11": 0.8181342671314875,
+      "parameters": 545007,
+      "bytes": 2312939,
+      "sha256": "b2d5108d89280fe5762492ebdbc29772d4e142951970becb4d1c2587d508fe31",
+      "provenance": "Downloaded from the completed validation-selected seed-2026 run after an audited plateau stop; server/local SHA-256 and the CPU-FP32 pure-state_dict structure were verified."
     },
     {
       "dataset": "SateHaze1k",
       "variant": "HGN-S",
-      "status": "missing",
-      "file": "SateHaze1k_HGN-S_best.pt"
+      "status": "available_representative_verified",
+      "file": "SateHaze1k_HGN-S_best.pt",
+      "seed": 2026,
+      "controller_decision": "early_stopped_plateau",
+      "control_stop_step": 13500,
+      "best_step": 11000,
+      "validation_psnr": 24.756420753115698,
+      "validation_ssim_gaussian11": 0.8111310605137121,
+      "parameters": 1707975,
+      "bytes": 7011211,
+      "sha256": "c48bbf7d6aea43067e0db43eb3ea976da26e13cb5c46b34f5d446af930f7a797",
+      "provenance": "Downloaded from the completed validation-selected seed-2026 run after an audited plateau stop; server/local SHA-256 and the CPU-FP32 pure-state_dict structure were verified."
     },
     {
       "dataset": "SateHaze1k",

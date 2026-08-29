@@ -10,14 +10,19 @@ three-seed mean and sample standard deviation by themselves.
 
 | Dataset | HGN-T | HGN-S | HGN-L |
 |---|---|---|---|
-| RRSHID | pending | seed 2026, step 38,000 | training: seed 2027 |
-| SateHaze1k | pending | pending | seed 2027, step 11,000 |
+| RRSHID | seed 2027, step 40,000 | seed 2026, step 38,000 | seed 2027, step 24,000 |
+| SateHaze1k | seed 2026, step 9,500 | seed 2026, step 11,000 | seed 2027, step 11,000 |
 
 The machine-readable source of truth is [`MANIFEST.json`](MANIFEST.json).
+SHA-256 digests are also listed in [`CHECKSUMS.sha256`](CHECKSUMS.sha256).
 Every public file is a CPU FP32 PyTorch `state_dict` without optimizer,
 scheduler, AMP-scaler, RNG, dataset image, or private-path state. Load it with
 `torch.load(path, map_location="cpu", weights_only=True)` and use
 `model.load_state_dict(state_dict, strict=True)`.
+
+The six files and this documentation are mirrored in the fixed
+[`revision-r1-r44`](https://github.com/jxy0413/HazeGroupNet/releases/tag/revision-r1-r44)
+release as `HazeGroupNet_Representative_Checkpoints_6x.zip`.
 
 ## Checkpoint-specific verification
 
