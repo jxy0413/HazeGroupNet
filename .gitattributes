@@ -11,3 +11,6 @@
 *.tif binary
 *.tiff binary
 *.pt binary
+
+# Preserve the exact archived bytes used by the R4.4 SHA-256 manifest.
+reproducibility/paper/r44_score_provenance/* -text
