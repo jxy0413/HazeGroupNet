@@ -19,9 +19,9 @@ fusion as the main information path.
 
 > **Release scope.** This repository contains source code, configurations,
 > split-manifest specifications, frozen-evaluation instructions, and a curated
-> representative-checkpoint set. The checkpoint release is being populated as
-> a six-model matrix (RRSHID/SateHaze1k x Tiny/Small/Large); its authoritative
-> current status is recorded in [`checkpoints/MANIFEST.json`](checkpoints/MANIFEST.json).
+> representative-checkpoint set. The checkpoint release contains the complete
+> six-model matrix (RRSHID/SateHaze1k x Tiny/Small/Large); its authoritative
+> inventory is recorded in [`checkpoints/MANIFEST.json`](checkpoints/MANIFEST.json).
 > Datasets and third-party baseline implementations are not redistributed.
 
 ## Highlights
@@ -133,8 +133,8 @@ comparing these values with measurements from another profiler.
 The manuscript uses fixed data splits, checkpoint-selection rules, and a
 frozen evaluation protocol. This release provides the protocol specification,
 a generic evaluator, reported-result metadata, and one representative
-validation-selected checkpoint for each dataset/variant as it becomes
-available. The six representative weights are not an ensemble and do not by
+validation-selected checkpoint for each dataset/variant. The six
+representative weights are not an ensemble and do not by
 themselves reproduce the manuscript's three-seed mean and sample SD.
 The evaluator clips and quantizes every prediction to 8-bit sRGB before
 computing metrics; `--save-predictions` writes the exact same arrays used by
