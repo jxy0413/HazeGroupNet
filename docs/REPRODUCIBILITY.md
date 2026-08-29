@@ -11,9 +11,9 @@ provide benchmark image data.
 
 The values in the manuscript are **reported paper results** obtained with the
 paper's frozen data splits, checkpoint-selection rules, evaluator, and
-hardware protocol. A six-checkpoint matrix is being populated with one
+hardware protocol. The complete six-checkpoint matrix contains one
 representative validation-selected run per dataset and model scale; its
-current inventory is recorded in `checkpoints/MANIFEST.json`. It is intended
+inventory is recorded in `checkpoints/MANIFEST.json`. It is intended
 for direct inference and checkpoint-specific verification and does not replace
 the 18 independent runs underlying the manuscript's three-seed mean and sample
 SD.
